@@ -11,17 +11,15 @@ const Navbar = ({ selected }) => {
 	];
 
 	return (
-		<div className='h-18 w-full bg-brown-dark text-white-pink flex flex-row items-center px-10 gap-x-15'>
+		<div className='min-h-18 h-18 w-full bg-brown-darkest text-white-pink flex flex-row items-center px-10 gap-x-15'>
 			<h1 className='font-[700] text-[28px]'>Wardrobe</h1>
 			<div className='gap-x-6 flex flex-row items-center'>
 				{links.map((link, index) => (
 					<div
 						key={index}
 						className={`${
-							selected == link.name
-								? 'bg-brown-darkest font-medium'
-								: 'hover:bg-brown-darkest hover:bg-opacity-10'
-						} px-4 py-1 rounded-[5px] text-base transition-all`}
+							selected == link.name ? 'bg-black-brown font-medium' : 'hover:bg-black-brown/30'
+						} px-4 py-1 rounded-[5px] text-base transition-all cursor-pointer`}
 						onClick={() => {
 							router.push(link.url);
 						}}
@@ -30,7 +28,10 @@ const Navbar = ({ selected }) => {
 					</div>
 				))}
 			</div>
-			<div className='gap-x-8 flex flex-row items-center'></div>
+			<div className='gap-x-8 flex flex-row items-center ml-auto'>
+				<h2>Log in</h2>
+				<div className='h-10 w-10 rounded-full bg-white-pink' />
+			</div>
 		</div>
 	);
 };

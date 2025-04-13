@@ -34,15 +34,16 @@ export default function GeneratorPage() {
 		}
 	}, [records]);
 	return (
-		<main className='h-full flex bg-white-pink'>
+		<>
 			<Navbar selected={'Generator'} />
-
-			{selectedTopId && (
-				<img
-					src={tops[selectedTopId]?.Image[0]?.url}
-					className='max-h-[300px] max-w-[90%] rounded-md'
-				/>
-			)}
-		</main>
+			<main className='h-full flex flex-col bg-white-pink'>
+				{selectedTopId && (
+					<img
+						src={tops[selectedTopId]?.Image[0]?.url}
+						className='max-h-[300px] max-w-[90%] rounded-md'
+					/>
+				)}
+			</main>
+		</>
 	);
 }
