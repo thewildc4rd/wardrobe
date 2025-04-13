@@ -1,5 +1,5 @@
 import React from 'react';
-import NavWardrobeBox from './navWardrobeBox';
+import NavWardrobeBox from '../NavWardrobeBox';
 
 const LeftWardrobeSection = (props) => {
 	return (
@@ -9,6 +9,7 @@ const LeftWardrobeSection = (props) => {
 					lidStyle={'bg-pink-medium'}
 					boxStyle={'bg-pink-light'}
 					text={'outfits'}
+					link={'/outfits'}
 					alternateRotate={true}
 				/>
 			</div>

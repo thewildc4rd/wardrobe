@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
-const NavWardrobeBox = ({ lidStyle, boxStyle, text, alternateRotate = false }) => {
+const NavWardrobeBox = ({ lidStyle, boxStyle, text, alternateRotate = false, link }) => {
 	const [boxHover, setBoxHover] = useState(false);
+	const router = useRouter();
 
 	return (
 		<>
@@ -14,6 +16,10 @@ const NavWardrobeBox = ({ lidStyle, boxStyle, text, alternateRotate = false }) =
 				className={`h-1/2 w-[64%] ${boxStyle} flex items-center justify-center`}
 				onMouseOver={() => setBoxHover(true)}
 				onMouseOut={() => setBoxHover(false)}
+				onClick={() => {
+					console.log(link);
+					router.push(link);
+				}}
 			>
 				<div className={`bg-white px-4 rounded-sm text-lg ${boxHover ? '' : ''} transition-all`}>
 					{text}

@@ -2,10 +2,10 @@
 
 import Navbar from '@/components/Navbar';
 
-export default function OutfitsPage() {
+export default function ItemsPage() {
 	return (
 		<main className='h-full flex bg-white-pink'>
-			<Navbar selected={'Outfits'} />
+			<Navbar selected={'Items'} />
 		</main>
 	);
 }
