@@ -23,24 +23,30 @@ export const getCollection = async (coll) => {
 
 export const addUser = async (uid, data) => {
 	try {
-		return setDoc(doc(db, 'users', uid), data);
+		return setDoc(doc(db, 'users', uid), { ...data, items: [], outfits: [] });
 	} catch (err) {
 		console.error(err);
 	}
 };
 
 // helpers for specific queries
-export const getUserFullName = async (creatorId) => {
+export const getUserFullName = async (userId) => {
 	const users = await getCollection('users');
-	const user = users.filter((user) => user.id == creatorId)[0];
+	const user = users.filter((user) => user.id == userId)[0];
 	return user.first + ' ' + user.last;
 };
 
-// export const getList = async (listId) => {
-// 	const lists = await getCollection('lists');
-// 	const list = lists.filter((list) => list.id == listId)[0];
-// 	return list;
-// };
+export const getUserItems = async (userId) => {
+	const users = await getCollection('users');
+	const user = users.filter((user) => user.id == userId)[0];
+	return user.items;
+};
+
+export const getUserOutfits = async (userId) => {
+	const users = await getCollection('users');
+	const user = users.filter((user) => user.id == userId)[0];
+	return user.outfits;
+};
 
 // export const getItemsInList = async (listId) => {
 // 	const allItems = await getCollection('items');
