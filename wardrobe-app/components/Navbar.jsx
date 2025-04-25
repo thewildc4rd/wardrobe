@@ -5,10 +5,10 @@ import { useAuth } from '@/authentication/AuthContext';
 import UserIcon from './icons/UserIcon';
 import { logOut } from '@/authentication/authUtils';
 
-const Navbar = ({ selected }) => {
+const Navbar = ({}) => {
 	const router = useRouter();
 	const pathname = usePathname();
-	const { userLoggedIn } = useAuth();
+	const { userLoggedIn, currentUser } = useAuth();
 
 	const links = [
 		{ name: 'Home', url: '/' },
@@ -36,32 +36,33 @@ const Navbar = ({ selected }) => {
 				))}
 			</div>
 			<div className='gap-x-5 flex flex-row items-center ml-auto'>
-				{!userLoggedIn && (
-					<h2
-						onClick={() => {
+				<div
+					className={`${
+						pathname === (!userLoggedIn ? '/signup' : '')
+							? 'bg-black-brown font-medium'
+							: 'hover:bg-black-brown/30'
+					} px-4 py-1 rounded-[5px] text-base transition-all cursor-pointer`}
+					onClick={async () => {
+						if (!userLoggedIn) {
 							router.push('/signup');
-						}}
-					>
-						Sign up
-					</h2>
-				)}
-				{userLoggedIn && (
-					<h2
-						onClick={async () => {
+						} else {
 							await logOut();
 							router.push('/');
-						}}
-					>
-						Log out
-					</h2>
-				)}
-				<div
-					className='h-10 w-10 rounded-full bg-white-pink flex items-center justify-center'
-					onClick={() => {
-						router.push(userLoggedIn ? '/profile' : '/login');
+						}
 					}}
 				>
-					<UserIcon />
+					<h2>{!userLoggedIn ? 'Sign up' : 'Log out'}</h2>
+				</div>
+				<div className=''>
+					<h2>{console.log(currentUser)}</h2>
+					<div
+						className='h-10 w-10 rounded-full bg-white-pink flex items-center justify-center cursor-pointer'
+						onClick={() => {
+							router.push(userLoggedIn ? '/profile' : '/login');
+						}}
+					>
+						<UserIcon />
+					</div>
 				</div>
 			</div>
 		</div>

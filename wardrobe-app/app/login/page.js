@@ -12,18 +12,24 @@ const LogInPage = (props) => {
 	const [errMsg, setErrMsg] = useState('');
 
 	const onSubmit = () => {
-		try {
-			logIn(email, password).then(() => {
+		logIn(email, password)
+			.then(() => {
 				router.push('/');
+			})
+			.catch((error) => {
+				if (error.message.includes('invalid-email')) {
+					setErrMsg('Invalid Email');
+				} else if (error.message.includes('invalid-credential')) {
+					setErrMsg('Invalid Password');
+				} else {
+					setErrMsg(error.message.replace(/[^:]*:\s*|\s*\([^)]*\)/g, ''));
+				}
 			});
-		} catch (err) {
-			setErrMsg('Invalid email or password');
-		}
 	};
 
 	return (
-		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center'>
-			<h1 className='text-4xl text-black-brown font-bold'>Log in</h1>
+		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center pt-15'>
+			<h1 className='text-4xl text-black-brown font-bold mb-5'>Log in</h1>
 			<div className='flex flex-col gap-4 w-96'>
 				<TextField
 					required
@@ -52,7 +58,7 @@ const LogInPage = (props) => {
 				<div className='text-red-700 text-center'>{errMsg}</div>
 				<div className='text-center py-2'>
 					Don&apos;t have an account?
-					<a className='ml-1 font-semibold' href='/signup'>
+					<a className='ml-1 font-semibold hover:underline' href='/signup'>
 						Sign up
 					</a>
 				</div>

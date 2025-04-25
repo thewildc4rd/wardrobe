@@ -17,27 +17,31 @@ const SignUpPage = (props) => {
 	const [errMsg, setErrMsg] = useState('');
 
 	const onSubmit = () => {
-		try {
-			if (password !== confirmPassword) {
-				setErrMsg("Passwords don't match");
-				return;
-			}
-			if (password == '' || email == '' || first == '' || last == '') {
-				setErrMsg("Required fields can't be empty");
-				return;
-			}
-			signUp(email, password).then((res) => {
+		if (password !== confirmPassword) {
+			setErrMsg("Passwords don't match.");
+			return;
+		}
+		if (password == '' || email == '' || first == '' || last == '') {
+			setErrMsg("Required fields can't be empty.");
+			return;
+		}
+		signUp(email, password, first)
+			.then((res) => {
 				addUser(res.user.uid, { first, last, email }).then(() => {
 					router.push('/');
 				});
+			})
+			.catch((error) => {
+				if (error.message.includes('email-already-in-use')) {
+					setErrMsg('Email already belongs to an account');
+				} else {
+					setErrMsg(error.message.replace(/[^:]*:\s*|\s*\([^)]*\)/g, ''));
+				}
 			});
-		} catch (err) {
-			setErrMsg('Invalid email or password');
-		}
 	};
 	return (
-		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center'>
-			<h1 className='text-4xl text-black-brown font-bold'>Sign up</h1>
+		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center pt-15'>
+			<h1 className='text-4xl text-black-brown font-bold mb-5'>Sign up</h1>
 			<div className='flex flex-col gap-4 w-96'>
 				<TextField
 					required
@@ -98,7 +102,7 @@ const SignUpPage = (props) => {
 
 				<div className='text-center py-2'>
 					Already have an account?
-					<a className='ml-1 font-semibold' href='/login'>
+					<a className='ml-1 font-semibold hover:underline' href='/login'>
 						Log in
 					</a>
 				</div>

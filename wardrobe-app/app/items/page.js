@@ -35,7 +35,7 @@ export default function ItemsPage() {
 				<div className='flex flex-row items-center gap-6'>
 					<h1 className='text-4xl text-black-brown font-bold'>Items</h1>
 					<button
-						className='bg-black-brown text-white-pink font-medium text-base p-[7px] rounded-md hover:opacity-70 transition-all'
+						className='bg-black-brown text-white-pink font-medium text-base p-[7px] rounded-md hover:opacity-70 transition-all cursor-pointer'
 						onClick={() => {
 							router.push('/items/new');
 						}}
@@ -53,7 +53,7 @@ export default function ItemsPage() {
 							setSearchString(event.target.value);
 						}}
 					/>
-					<div className='bg-brown-dark p-[6px] flex items-center rounded-r-md hover:opacity-70 transition-all'>
+					<div className='bg-brown-dark p-[6px] flex items-center rounded-r-md hover:opacity-70 transition-all cursor-pointer'>
 						<SearchIcon colour={'#F5F2F2'} />
 					</div>
 				</div>
