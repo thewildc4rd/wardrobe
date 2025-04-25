@@ -13,6 +13,7 @@ export default function ItemsPage() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [searchString, setSearchString] = useState('');
 	const router = useRouter();
+
 	useEffect(() => {
 		const fetchAirtableData = async () => {
 			setIsLoading(true);

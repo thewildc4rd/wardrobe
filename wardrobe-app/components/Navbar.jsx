@@ -35,7 +35,7 @@ const Navbar = ({}) => {
 					</div>
 				))}
 			</div>
-			<div className='gap-x-5 flex flex-row items-center ml-auto'>
+			<div className='gap-x-2 flex flex-row items-center ml-auto'>
 				<div
 					className={`${
 						pathname === (!userLoggedIn ? '/signup' : '')
@@ -56,7 +56,7 @@ const Navbar = ({}) => {
 				<div className=''>
 					<h2>{console.log(currentUser)}</h2>
 					<div
-						className='h-10 w-10 rounded-full bg-white-pink flex items-center justify-center cursor-pointer'
+						className='h-10 w-10 rounded-full bg-white-pink overflow-hidden flex items-center justify-center cursor-pointer border-3'
 						onClick={() => {
 							router.push(userLoggedIn ? '/profile' : '/login');
 						}}

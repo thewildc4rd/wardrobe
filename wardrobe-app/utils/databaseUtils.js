@@ -13,13 +13,13 @@ export const getCollection = async (coll) => {
 	}
 };
 
-// export const addList = async (data) => {
-// 	try {
-// 		return addDoc(collection(db, 'lists'), data);
-// 	} catch (err) {
-// 		console.error(err);
-// 	}
-// };
+export const addItem = async (data) => {
+	try {
+		return addDoc(collection(db, 'items'), { ...data });
+	} catch (err) {
+		console.error(err);
+	}
+};
 
 export const addUser = async (uid, data) => {
 	try {
