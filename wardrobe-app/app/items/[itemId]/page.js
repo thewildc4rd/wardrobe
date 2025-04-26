@@ -1,14 +1,9 @@
 'use client';
 
-import ItemCard from '@/components/ItemCard';
-import Navbar from '@/components/Navbar';
-import React, { useState, useEffect, use } from 'react';
-import SearchIcon from '@/components/icons/SearchIcon';
-import AddIcon from '@/components/icons/AddIcon';
+import React, { use } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {
 	CircularProgress,
-	FilledInput,
 	FormControl,
 	IconButton,
 	InputAdornment,
@@ -28,6 +23,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
+import DefaultImage from '@/components/DefaultImage';
 
 export default function ItemsPage({ params }) {
 	const { itemId } = use(params);
@@ -64,7 +60,20 @@ export default function ItemsPage({ params }) {
 			</div>
 
 			<div className='w-full h-full flex'>
-				<img src={item?.image} className='w-[40%] h-[calc(100svh-112px)] bg-contain object-cover' />
+				{item?.image && (
+					<img
+						src={item?.image}
+						className='w-[40%] h-[calc(100svh-112px)] bg-contain object-cover'
+					/>
+				)}
+				{!item?.image && (
+					<DefaultImage
+						type='image'
+						height='calc(100svh-112px)'
+						width={'40%'}
+						style={{ borderRadius: '0px' }}
+					/>
+				)}
 				<div className='flex-1 px-10 flex flex-col gap-y-1'>
 					<div className='flex w-full gap-x-4 mb-2'>
 						<h1 className='text-4xl font-semibold text-black-brown'>{item?.name}</h1>
@@ -88,9 +97,9 @@ export default function ItemsPage({ params }) {
 							<InputLabel htmlFor='price'>Price</InputLabel>
 							<OutlinedInput
 								disabled
-								id='price'
-								startAdornment={<InputAdornment position='start'>$</InputAdornment>}
 								label='Price'
+								value={item?.price}
+								startAdornment={<InputAdornment position='start'>$</InputAdornment>}
 							/>
 						</FormControl>
 						<TextField disabled label='Brand Colour' value={item?.brandColour} />
