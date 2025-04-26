@@ -31,10 +31,10 @@ const NewItemPage = (props) => {
 	const [brandColour, setBrandColour] = useState('');
 	const [colours, setColours] = useState([]);
 	const [currentColour, setCurrentColour] = useState('');
-	const [link, setLink] = React.useState('');
-	const [code, setCode] = React.useState('');
-	const [datePurchased, setDatePurchased] = React.useState(null);
-	const [errMsg, setErrMsg] = React.useState('');
+	const [link, setLink] = useState('');
+	const [code, setCode] = useState('');
+	const [datePurchased, setDatePurchased] = useState(null);
+	const [errMsg, setErrMsg] = useState('');
 	const { currentUser } = useAuth();
 	const router = useRouter();
 

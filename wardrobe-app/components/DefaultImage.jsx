@@ -2,7 +2,7 @@ import { Grid } from '@mui/material';
 import React from 'react';
 import PhotoSizeSelectActualIcon from '@mui/icons-material/PhotoSizeSelectActual';
 
-const DefaultThumbnail = ({ height, width, style }) => {
+const DefaultImage = ({ height, width, style }) => {
 	return (
 		<Grid
 			container
@@ -13,9 +13,9 @@ const DefaultThumbnail = ({ height, width, style }) => {
 			data-testid={'default-thumbnail'}
 			sx={{ bgcolor: '#e4e4e7', borderRadius: '15px', ...style }}
 		>
-			<PhotoSizeSelectActualIcon sx={{ color: '#9B9B9B', height: '40%', width: '40%' }} />
+			<PhotoSizeSelectActualIcon sx={{ color: '#9B9B9B', height: '30%', width: '30%' }} />
 		</Grid>
 	);
 };
 
-export default DefaultThumbnail;
+export default DefaultImage;

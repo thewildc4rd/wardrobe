@@ -3,6 +3,7 @@ import ImageIcon from '@mui/icons-material/Image';
 import ColourPill from './ColourPill';
 import BrandPill from './BrandPill';
 import TypePill from './TypePill';
+import DefaultImage from './DefaultImage';
 
 const ItemCard = ({ item, onClick }) => {
 	return (
@@ -17,9 +18,7 @@ const ItemCard = ({ item, onClick }) => {
 				/>
 			)}
 			{!item?.image && (
-				<div className='w-full h-[260px] bg-zinc-200 rounded-lg flex items-center justify-center'>
-					<ImageIcon color='disabled' fontSize='large' />
-				</div>
+				<DefaultImage type='image' height='260px' width={'100%'} style={{ borderRadius: '8px' }} />
 			)}
 			<p className='text-base font-medium text-center'>{item.name}</p>
 			<div className='flex flex-row gap-2 flex-wrap justify-center'>

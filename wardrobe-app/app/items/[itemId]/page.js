@@ -77,7 +77,13 @@ export default function ItemsPage({ params }) {
 				<div className='flex-1 px-10 flex flex-col gap-y-1'>
 					<div className='flex w-full gap-x-4 mb-2'>
 						<h1 className='text-4xl font-semibold text-black-brown'>{item?.name}</h1>
-						<IconButton aria-label='Edit' color='blackBrown'>
+						<IconButton
+							aria-label='Edit'
+							color='blackBrown'
+							onClick={() => {
+								router.push('/items/' + itemId + '/edit');
+							}}
+						>
 							<EditIcon />
 						</IconButton>
 						<IconButton aria-label='Delete' color='default' sx={{ marginLeft: 'auto' }}>
@@ -114,6 +120,7 @@ export default function ItemsPage({ params }) {
 								format={'DD/MM/YYYY'}
 								disableFuture
 							/>
+							{console.log(item?.datePurchased)}
 						</LocalizationProvider>
 						<TextField disabled multiline minRows={4} label='Notes' value={item?.notes} />
 					</div>
