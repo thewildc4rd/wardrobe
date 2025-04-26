@@ -14,6 +14,9 @@ export const theme = createTheme({
 		secondary: {
 			main: '#5A4839',
 		},
+		blackBrown: {
+			main: '#161310',
+		},
 	},
 	typography: {
 		button: {

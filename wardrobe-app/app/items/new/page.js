@@ -17,6 +17,9 @@ import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { colours as colourDict } from '@/utils/colourUtils';
 import CrossIcon from '@/components/icons/CrossIcon';
 import UploadImage from '@/components/UploadImage';
+import { useAuth } from '@/authentication/AuthContext';
+import { addItem } from '@/utils/databaseUtils';
+import { useRouter } from 'next/navigation';
 
 const NewItemPage = (props) => {
 	const [image, setImage] = useState('');
@@ -32,19 +35,27 @@ const NewItemPage = (props) => {
 	const [code, setCode] = React.useState('');
 	const [datePurchased, setDatePurchased] = React.useState(null);
 	const [errMsg, setErrMsg] = React.useState('');
+	const { currentUser } = useAuth();
+	const router = useRouter();
 
 	const onSubmit = () => {
 		let data = {
+			image,
 			name,
 			type,
 			brand,
 			price,
+			size,
 			colours,
 			brandColour,
 			link,
 			code,
-			datePurchased,
+			datePurchased: datePurchased.format('DD-MM-YYYY'),
+			ownerId: currentUser.uid,
 		};
+		addItem(data).then(() => {
+			router.push('/items');
+		});
 	};
 
 	const addColour = () => {
@@ -82,14 +93,14 @@ const NewItemPage = (props) => {
 							setType(event.target.value);
 						}}
 					>
-						<MenuItem value={'top'}>Top</MenuItem>
-						<MenuItem value={'skirt'}>Skirt</MenuItem>
-						<MenuItem value={'pants'}>Pants</MenuItem>
-						<MenuItem value={'jacket'}>Jacket</MenuItem>
-						<MenuItem value={'dress'}>Dress</MenuItem>
-						<MenuItem value={'belt'}>Belt</MenuItem>
-						<MenuItem value={'shirt'}>Shirt</MenuItem>
-						<MenuItem value={'cardigan'}>Cardigan</MenuItem>
+						<MenuItem value={'Top'}>Top</MenuItem>
+						<MenuItem value={'Skirt'}>Skirt</MenuItem>
+						<MenuItem value={'Pants'}>Pants</MenuItem>
+						<MenuItem value={'Jacket'}>Jacket</MenuItem>
+						<MenuItem value={'Dress'}>Dress</MenuItem>
+						<MenuItem value={'Belt'}>Belt</MenuItem>
+						<MenuItem value={'Shirt'}>Shirt</MenuItem>
+						<MenuItem value={'Cardigan'}>Cardigan</MenuItem>
 					</Select>
 				</FormControl>
 				<TextField
@@ -220,6 +231,7 @@ const NewItemPage = (props) => {
 						onChange={(newValue) => setDatePurchased(newValue)}
 						variant='filled'
 						format={'DD/MM/YYYY'}
+						disableFuture
 					/>
 				</LocalizationProvider>
 				<Button variant='contained' onClick={onSubmit}>

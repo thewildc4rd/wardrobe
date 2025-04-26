@@ -21,9 +21,15 @@ export const addItem = async (data) => {
 	}
 };
 
+export const getItem = async (itemId) => {
+	const items = await getCollection('items');
+	const item = items.find((item) => item.id === itemId);
+	return item;
+};
+
 export const addUser = async (uid, data) => {
 	try {
-		return setDoc(doc(db, 'users', uid), { ...data, items: [], outfits: [] });
+		return setDoc(doc(db, 'users', uid), { ...data });
 	} catch (err) {
 		console.error(err);
 	}
@@ -37,9 +43,9 @@ export const getUserFullName = async (userId) => {
 };
 
 export const getUserItems = async (userId) => {
-	const users = await getCollection('users');
-	const user = users.filter((user) => user.id == userId)[0];
-	return user.items;
+	const items = await getCollection('items');
+	const userItems = items.filter((item) => item.ownerId === userId);
+	return userItems;
 };
 
 export const getUserOutfits = async (userId) => {

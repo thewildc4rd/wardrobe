@@ -1,45 +1,35 @@
 import React from 'react';
 import ImageIcon from '@mui/icons-material/Image';
-import { colours } from '@/utils/colourUtils';
+import ColourPill from './ColourPill';
+import BrandPill from './BrandPill';
+import TypePill from './TypePill';
 
-const ItemCard = ({ item }) => {
+const ItemCard = ({ item, onClick }) => {
 	return (
-		<div className='shadow-lg bg-white-pink-light pb-5 rounded-lg p-2 flex flex-col items-center gap-y-2'>
-			{item?.Image.length !== 0 && (
+		<div
+			className='shadow-lg bg-white-pink-light pb-5 rounded-lg p-2 flex flex-col items-center gap-y-2 cursor-pointer hover:bg-white transition-all'
+			onClick={onClick}
+		>
+			{item?.image && (
 				<img
-					src={item?.Image[0]?.url}
-					className='flex-1 max-h-[260px] w-full bg-contain rounded-lg object-cover'
+					src={item?.image}
+					className='flex-1 w-full max-h-[260px] bg-contain rounded-lg object-cover'
 				/>
 			)}
-			{item?.Image.length === 0 && (
+			{!item?.image && (
 				<div className='w-full h-[260px] bg-zinc-200 rounded-lg flex items-center justify-center'>
 					<ImageIcon color='disabled' fontSize='large' />
 				</div>
 			)}
-			<p className='text-base font-medium text-center'>{item['Item Name']}</p>
+			<p className='text-base font-medium text-center'>{item.name}</p>
 			<div className='flex flex-row gap-2 flex-wrap justify-center'>
-				{item['Type'] && (
-					<div className='flex items-center border-brown-darkest border-2 text-black-brown px-[14px] rounded-full text-sm hover:bg-brown-darkest/20 transition-all'>
-						{item['Type']}
-					</div>
-				)}
-				{item['Brand'] && (
-					<div className='flex items-center border-brown-light border-2 text-black-brown px-[14px] rounded-full text-sm hover:bg-brown-light/20 transition-all'>
-						{item['Brand']}
-					</div>
-				)}
+				{item?.type && <TypePill type={item.type} />}
+				{item?.brand && <BrandPill brand={item.brand} />}
 			</div>
 			<div className='flex flex-row gap-2 flex-wrap justify-center'>
-				{item['Colours'].map((colour) => {
-					return (
-						<div
-							key={colour}
-							className={`${colours[colour]?.bg} ${colours[colour]?.text} ${colours[colour]?.hover} flex items-center px-4 py-[1px] rounded-full text-sm transition-all`}
-						>
-							{colour}
-						</div>
-					);
-				})}
+				{item?.colours?.map((colour) => (
+					<ColourPill key={colour} colour={colour} />
+				))}
 			</div>
 		</div>
 	);

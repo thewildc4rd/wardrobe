@@ -53,16 +53,13 @@ const Navbar = ({}) => {
 				>
 					<h2>{!userLoggedIn ? 'Sign up' : 'Log out'}</h2>
 				</div>
-				<div className=''>
-					<h2>{console.log(currentUser)}</h2>
-					<div
-						className='h-10 w-10 rounded-full bg-white-pink overflow-hidden flex items-center justify-center cursor-pointer border-3'
-						onClick={() => {
-							router.push(userLoggedIn ? '/profile' : '/login');
-						}}
-					>
-						<UserIcon />
-					</div>
+				<div
+					className='h-10 w-10 rounded-full bg-white-pink overflow-hidden flex items-center justify-center cursor-pointer border-3'
+					onClick={() => {
+						router.push(userLoggedIn ? '/profile' : '/login');
+					}}
+				>
+					<UserIcon />
 				</div>
 			</div>
 		</div>

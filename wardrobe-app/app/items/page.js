@@ -1,34 +1,27 @@
 'use client';
 
 import ItemCard from '@/components/ItemCard';
-import Navbar from '@/components/Navbar';
 import React, { useState, useEffect } from 'react';
 import SearchIcon from '@/components/icons/SearchIcon';
 import AddIcon from '@/components/icons/AddIcon';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from 'next/navigation';
+import { useQuery } from '@tanstack/react-query';
+import { getUserItems } from '@/utils/databaseUtils';
+import { useAuth } from '@/authentication/AuthContext';
+import CrossIcon from '@/components/icons/CrossIcon';
 
 export default function ItemsPage() {
 	const [records, setRecords] = useState([]);
-	const [isLoading, setIsLoading] = useState(false);
 	const [searchString, setSearchString] = useState('');
+	const [currSearchString, setCurrSearchString] = useState('');
 	const router = useRouter();
+	const { currentUser } = useAuth();
 
-	useEffect(() => {
-		const fetchAirtableData = async () => {
-			setIsLoading(true);
-			const res = await fetch('/api/airtable');
-			const json = await res.json();
-			const newRecords = json.records.map((record) => ({
-				id: record?.id,
-				createdTime: record?.createdTime,
-				...record?.fields,
-			}));
-			setRecords(newRecords);
-			setIsLoading(false);
-		};
-		fetchAirtableData();
-	}, []);
+	const { isLoading, data: items } = useQuery({
+		queryKey: ['items'],
+		queryFn: () => getUserItems(currentUser.uid),
+	});
 
 	return (
 		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4'>
@@ -45,16 +38,40 @@ export default function ItemsPage() {
 					</button>
 				</div>
 				<div className='ml-auto flex items-center'>
+					{searchString && (
+						<div className='flex mr-2 items-center'>
+							<div className='text-sm text-brown-darkest'>Search results for "{searchString}"</div>
+							<CrossIcon
+								className={'cursor-pointer'}
+								colour={'#47392D'}
+								onClick={() => {
+									setSearchString('');
+									setCurrSearchString('');
+								}}
+							/>
+						</div>
+					)}
 					<input
 						type='text'
 						placeholder='Search'
 						title='Search'
 						className='bg-brown-dark/10 text-brown-dark border-2 border-brown-dark p-1 px-2 rounded-l-md'
+						value={currSearchString}
 						onChange={(event) => {
-							setSearchString(event.target.value);
+							setCurrSearchString(event.target.value);
+						}}
+						onKeyDown={(event) => {
+							if (event.key === 'Enter') {
+								setSearchString(currSearchString);
+							}
 						}}
 					/>
-					<div className='bg-brown-dark p-[6px] flex items-center rounded-r-md hover:opacity-70 transition-all cursor-pointer'>
+					<div
+						className='bg-brown-dark p-[6px] flex items-center rounded-r-md hover:opacity-70 transition-all cursor-pointer'
+						onClick={() => {
+							setSearchString(currSearchString);
+						}}
+					>
 						<SearchIcon colour={'#F5F2F2'} />
 					</div>
 				</div>
@@ -66,14 +83,18 @@ export default function ItemsPage() {
 			)}
 			{!isLoading && (
 				<div className='grid grid-cols-6 grid-rows-2 gap-x-4 flex-wrap gap-y-8'>
-					{records
-						.filter((record) =>
+					{items
+						?.filter((item) =>
 							searchString !== ''
-								? record['Name']?.toLowerCase().includes(searchString.toLowerCase())
+								? item?.name?.toLowerCase().includes(searchString.toLowerCase())
 								: true
 						)
-						.map((record) => (
-							<ItemCard key={record.id} item={record} />
+						?.map((item) => (
+							<ItemCard
+								key={item.id}
+								item={item}
+								onClick={() => router.push('/items/' + item.id)}
+							/>
 						))}
 				</div>
 			)}
