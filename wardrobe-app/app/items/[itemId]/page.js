@@ -63,8 +63,8 @@ export default function ItemsPage({ params }) {
 				<div className='text-pink-800 cursor-default'>{item?.name}</div>
 			</div>
 
-			<div className='w-full flex'>
-				<img src={item?.image} className='w-[50%] bg-contain object-cover' />
+			<div className='w-full h-full flex'>
+				<img src={item?.image} className='w-[40%] h-[calc(100svh-112px)] bg-contain object-cover' />
 				<div className='flex-1 px-10 flex flex-col gap-y-1'>
 					<div className='flex w-full gap-x-4 mb-2'>
 						<h1 className='text-4xl font-semibold text-black-brown'>{item?.name}</h1>
@@ -76,10 +76,10 @@ export default function ItemsPage({ params }) {
 						</IconButton>
 					</div>
 					<div className='flex flex-row gap-2 flex-wrap w-full'>
-						{item?.type && <TypePill type={item.type} />}
-						{item?.brand && <BrandPill brand={item.brand} />}
+						{item?.type && <TypePill type={item.type} size='medium' />}
+						{item?.brand && <BrandPill brand={item.brand} size='medium' />}
 						{item?.colours?.map((colour) => (
-							<ColourPill key={colour} colour={colour} />
+							<ColourPill key={colour} colour={colour} size='medium' />
 						))}
 					</div>
 					<div className='py-4 flex flex-col gap-y-4'>
