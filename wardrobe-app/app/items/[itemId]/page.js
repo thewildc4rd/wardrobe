@@ -3,7 +3,6 @@
 import React, { use } from 'react';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import {
-	CircularProgress,
 	FormControl,
 	IconButton,
 	InputAdornment,
@@ -24,6 +23,10 @@ import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import dayjs from 'dayjs';
 import DefaultImage from '@/components/DefaultImage';
+import LoadingPage from '@/components/LoadingPage';
+import ItemBreadcrumb from '@/components/ItemBreadcrumb';
+import ItemHeader from '@/components/ItemHeader';
+import ItemDisabledInputs from '@/components/ItemDisabledInputs';
 
 export default function ItemsPage({ params }) {
 	const { itemId } = use(params);
@@ -35,29 +38,12 @@ export default function ItemsPage({ params }) {
 	});
 
 	if (isLoading) {
-		return (
-			<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4'>
-				<div className='h-full w-full flex items-center justify-center'>
-					<CircularProgress color='inherit' />
-				</div>
-			</div>
-		);
+		return <LoadingPage />;
 	}
 
 	return (
 		<div className='h-full flex flex-col bg-white-pink'>
-			<div className='flex px-10 py-2 gap-x-1 font-medium'>
-				<div
-					className='hover:underline cursor-pointer'
-					onClick={() => {
-						router.push('/items');
-					}}
-				>
-					Items
-				</div>
-				<NavigateNextIcon />
-				<div className='text-pink-800 cursor-default'>{item?.name}</div>
-			</div>
+			<ItemBreadcrumb itemId={itemId} itemName={item?.name} />
 
 			<div className='w-full h-full flex'>
 				{item?.image && (
@@ -75,55 +61,14 @@ export default function ItemsPage({ params }) {
 					/>
 				)}
 				<div className='flex-1 px-10 flex flex-col gap-y-1'>
-					<div className='flex w-full gap-x-4 mb-2'>
-						<h1 className='text-4xl font-semibold text-black-brown'>{item?.name}</h1>
-						<IconButton
-							aria-label='Edit'
-							color='blackBrown'
-							onClick={() => {
-								router.push('/items/' + itemId + '/edit');
-							}}
-						>
-							<EditIcon />
-						</IconButton>
-						<IconButton aria-label='Delete' color='default' sx={{ marginLeft: 'auto' }}>
-							<DeleteIcon />
-						</IconButton>
-					</div>
-					<div className='flex flex-row gap-2 flex-wrap w-full'>
-						{item?.type && <TypePill type={item.type} size='medium' />}
-						{item?.brand && <BrandPill brand={item.brand} size='medium' />}
-						{item?.colours?.map((colour) => (
-							<ColourPill key={colour} colour={colour} size='medium' />
-						))}
-					</div>
-					<div className='py-4 flex flex-col gap-y-4'>
-						<TextField disabled label='Size' id='size' value={item?.size} />
-						<FormControl fullWidth>
-							<InputLabel htmlFor='price'>Price</InputLabel>
-							<OutlinedInput
-								disabled
-								label='Price'
-								value={item?.price}
-								startAdornment={<InputAdornment position='start'>$</InputAdornment>}
-							/>
-						</FormControl>
-						<TextField disabled label='Brand Colour' value={item?.brandColour} />
-						<TextField disabled label='Link' value={item?.link} />
-						<TextField disabled label='Code / SKU#' value={item?.code} />
-						<LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='en-au'>
-							<DatePicker
-								disabled
-								label='Date Purchased'
-								value={dayjs(item?.datePurchased, 'DD-MM-YYYY')}
-								variant='filled'
-								format={'DD/MM/YYYY'}
-								disableFuture
-							/>
-							{console.log(item?.datePurchased)}
-						</LocalizationProvider>
-						<TextField disabled multiline minRows={4} label='Notes' value={item?.notes} />
-					</div>
+					<ItemHeader
+						title={item?.name}
+						editFunction={() => {
+							router.push('/items/' + itemId + '/edit');
+						}}
+						edit={true}
+					/>
+					<ItemDisabledInputs item={item} />
 				</div>
 			</div>
 		</div>

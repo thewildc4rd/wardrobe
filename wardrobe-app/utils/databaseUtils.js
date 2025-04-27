@@ -21,6 +21,14 @@ export const addItem = async (data) => {
 	}
 };
 
+export const editItem = async (itemId, data) => {
+	try {
+		return setDoc(doc(db, 'items', itemId), { ...data }, { merge: true });
+	} catch (err) {
+		console.error(err);
+	}
+};
+
 export const getItem = async (itemId) => {
 	const items = await getCollection('items');
 	const item = items.find((item) => item.id === itemId);
