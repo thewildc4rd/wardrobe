@@ -1,8 +1,8 @@
-import { Box, Button, Fab, Grid } from '@mui/material';
+import { Button } from '@mui/material';
 import React from 'react';
 import DefaultImage from './DefaultImage';
 
-const UploadImage = ({ image, setImage, style }) => {
+const UploadImage = ({ image, setImage }) => {
 	const handleUploadImage = (e) => {
 		// get the file uploaded
 		const file = e.target.files[0];
