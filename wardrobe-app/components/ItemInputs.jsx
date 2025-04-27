@@ -17,9 +17,11 @@ import { colours as colourDict } from '@/utils/colourUtils';
 import CrossIcon from '@/components/icons/CrossIcon';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-au';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 const ItemInputs = ({ itemData, setItemData, setErrMsg }) => {
 	dayjs.locale('en-au');
+	dayjs.extend(customParseFormat);
 
 	const [currentColour, setCurrentColour] = useState('');
 

@@ -7,9 +7,11 @@ import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import dayjs from 'dayjs';
 import 'dayjs/locale/en-au';
+import customParseFormat from 'dayjs/plugin/customParseFormat';
 
 const ItemDisabledInputs = ({ item }) => {
 	dayjs.locale('en-au');
+	dayjs.extend(customParseFormat);
 
 	return (
 		<>
@@ -42,8 +44,8 @@ const ItemDisabledInputs = ({ item }) => {
 						format={'DD-MM-YYYY'}
 						disableFuture
 					/>
-					{/* {console.log(item?.datePurchased)}
-					{console.log(item?.datePurchased ? dayjs(item?.datePurchased, 'DD-MM-YYYY') : null)} */}
+					{console.log(item?.datePurchased)}
+					{console.log(item?.datePurchased ? dayjs(item?.datePurchased, 'DD-MM-YYYY') : null)}
 				</LocalizationProvider>
 				<TextField disabled multiline minRows={4} label='Notes' value={item?.notes} />
 			</div>

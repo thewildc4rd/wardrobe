@@ -69,6 +69,7 @@ export default function ItemsPage({ params }) {
 						saveFunction={() => {
 							onSubmit();
 						}}
+						delet={true}
 					/>
 					<ItemInputs itemData={itemData} setItemData={setItemData} setErrMsg={setErrMsg} />
 				</div>
