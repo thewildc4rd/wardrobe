@@ -196,7 +196,16 @@ const ItemInputs = ({ itemData, setItemData, setErrMsg }) => {
 					disableFuture
 				/>
 			</LocalizationProvider>
-			<TextField multiline minRows={4} label='Notes' value={itemData?.notes} />
+			<TextField
+				multiline
+				minRows={4}
+				label='Notes'
+				value={itemData?.notes}
+				onChange={(e) => {
+					setItemData({ ...itemData, notes: e.target.value });
+					setErrMsg('');
+				}}
+			/>
 		</div>
 	);
 };
