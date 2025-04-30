@@ -17,7 +17,7 @@ const ItemBreadcrumb = ({ itemId, itemName, edit }) => {
 			</div>
 			<NavigateNextIcon />
 			<div
-				className={`${edit ? 'hover:underline cursor-pointer' : 'text-pink-800 cursor-default'}`}
+				className={`${edit ? 'hover:underline cursor-pointer' : 'text-red-medium cursor-default'}`}
 				onClick={() => {
 					router.push('/items/' + itemId);
 				}}
@@ -27,7 +27,7 @@ const ItemBreadcrumb = ({ itemId, itemName, edit }) => {
 			{edit && (
 				<>
 					<NavigateNextIcon />
-					<div className='text-pink-800 cursor-default'>Edit</div>
+					<div className='text-red-medium cursor-default'>Edit</div>
 				</>
 			)}
 		</div>

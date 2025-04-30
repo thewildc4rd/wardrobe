@@ -17,6 +17,9 @@ export const theme = createTheme({
 		blackBrown: {
 			main: '#161310',
 		},
+		info: {
+			main: '#A30D29',
+		},
 	},
 	typography: {
 		button: {

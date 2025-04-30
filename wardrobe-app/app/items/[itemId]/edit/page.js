@@ -5,12 +5,12 @@ import { useQuery } from '@tanstack/react-query';
 import { editItem, getItem } from '@/utils/databaseUtils';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/authentication/AuthContext';
-import UploadImage from '@/components/UploadImage';
 import LoadingPage from '@/components/LoadingPage';
-import DefaultImage from '@/components/DefaultImage';
 import ItemInputs from '@/components/ItemInputs';
 import ItemBreadcrumb from '@/components/ItemBreadcrumb';
 import ItemHeader from '@/components/ItemHeader';
+import UploadImageFullLength from '@/components/UploadImageFullLength';
+import dayjs from 'dayjs';
 
 export default function ItemsPage({ params }) {
 	const [image, setImage] = useState('');
@@ -26,7 +26,10 @@ export default function ItemsPage({ params }) {
 	});
 
 	useEffect(() => {
-		setItemData(item);
+		setItemData({
+			...item,
+			datePurchased: item?.datePurchased ? dayjs(item?.datePurchased, 'DD-MM-YYYY') : null,
+		});
 		setImage(item?.image);
 	}, [item]);
 
@@ -50,17 +53,7 @@ export default function ItemsPage({ params }) {
 			<ItemBreadcrumb itemId={itemId} itemName={itemData?.name} edit={true} />
 			<div className='w-full flex h-full'>
 				<div className='h-[calc(100svh-112px)] w-[40%] flex flex-col'>
-					{itemData?.image && (
-						<img src={itemData?.image} className='h-full bg-contain object-cover' />
-					)}
-					{!itemData?.image && (
-						<DefaultImage
-							type='image'
-							height='100%'
-							width={'100%'}
-							style={{ borderRadius: '0px' }}
-						/>
-					)}
+					<UploadImageFullLength image={image} setImage={setImage} />
 				</div>
 				<div className='flex-1 px-10 flex flex-col gap-y-1 mb-10'>
 					<ItemHeader
