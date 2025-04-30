@@ -47,7 +47,14 @@ const ItemDisabledInputs = ({ item }) => {
 					{console.log(item?.datePurchased)}
 					{console.log(item?.datePurchased ? dayjs(item?.datePurchased, 'DD-MM-YYYY') : null)}
 				</LocalizationProvider>
-				<TextField disabled multiline minRows={4} label='Notes' value={item?.notes} />
+				<TextField
+					disabled
+					multiline
+					minRows={4}
+					label='Notes'
+					value={item?.notes}
+					variant='outlined'
+				/>
 			</div>
 		</>
 	);

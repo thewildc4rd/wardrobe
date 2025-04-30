@@ -200,6 +200,7 @@ const ItemInputs = ({ itemData, setItemData, setErrMsg }) => {
 				multiline
 				minRows={4}
 				label='Notes'
+				variant='outlined'
 				value={itemData?.notes}
 				onChange={(e) => {
 					setItemData({ ...itemData, notes: e.target.value });
