@@ -19,7 +19,7 @@ const OutfitItemCard = ({ item }) => {
 							: "url('/images/defaultImageSquare.png')",
 					}}
 				>
-					{console.log(item?.image)}
+					∂{' '}
 				</div>
 			</div>
 		</>
