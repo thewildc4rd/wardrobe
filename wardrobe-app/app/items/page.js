@@ -1,19 +1,17 @@
 'use client';
 
 import React, { useState } from 'react';
-import SearchIcon from '@/components/icons/SearchIcon';
 import AddIcon from '@/components/icons/AddIcon';
 import { CircularProgress } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { getUserItems } from '@/utils/databaseUtils';
 import { useAuth } from '@/authentication/AuthContext';
-import CrossIcon from '@/components/icons/CrossIcon';
 import ItemCard from '@/components/item/ItemCard';
+import ItemSearchBar from '@/components/item/ItemSearchBar';
 
 export default function ItemsPage() {
 	const [searchString, setSearchString] = useState('');
-	const [currSearchString, setCurrSearchString] = useState('');
 	const router = useRouter();
 	const { currentUser } = useAuth();
 
@@ -36,44 +34,7 @@ export default function ItemsPage() {
 						<AddIcon colour={'#F5F2F2'} />
 					</button>
 				</div>
-				<div className='ml-auto flex items-center'>
-					{searchString && (
-						<div className='flex mr-2 items-center'>
-							<div className='text-sm text-brown-darkest'>Search results for "{searchString}"</div>
-							<CrossIcon
-								className={'cursor-pointer'}
-								colour={'#47392D'}
-								onClick={() => {
-									setSearchString('');
-									setCurrSearchString('');
-								}}
-							/>
-						</div>
-					)}
-					<input
-						type='text'
-						placeholder='Search'
-						title='Search'
-						className='bg-brown-dark/10 text-brown-dark border-2 border-brown-dark p-1 px-2 rounded-l-md'
-						value={currSearchString}
-						onChange={(event) => {
-							setCurrSearchString(event.target.value);
-						}}
-						onKeyDown={(event) => {
-							if (event.key === 'Enter') {
-								setSearchString(currSearchString);
-							}
-						}}
-					/>
-					<div
-						className='bg-brown-dark p-[6px] flex items-center rounded-r-md hover:opacity-70 transition-all cursor-pointer'
-						onClick={() => {
-							setSearchString(currSearchString);
-						}}
-					>
-						<SearchIcon colour={'#F5F2F2'} />
-					</div>
-				</div>
+				<ItemSearchBar searchString={searchString} setSearchString={setSearchString} />
 			</div>
 			{isLoading && (
 				<div className='h-full w-full flex items-center justify-center'>
