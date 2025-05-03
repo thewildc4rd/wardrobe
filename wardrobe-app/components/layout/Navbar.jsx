@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import { useAuth } from '@/authentication/AuthContext';
-import UserIcon from './icons/UserIcon';
+import UserIcon from '../icons/UserIcon';
 import { logOut } from '@/authentication/authUtils';
 
 const Navbar = ({}) => {

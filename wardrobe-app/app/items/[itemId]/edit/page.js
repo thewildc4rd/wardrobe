@@ -6,10 +6,10 @@ import { editItem, getItem } from '@/utils/databaseUtils';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/authentication/AuthContext';
 import LoadingPage from '@/components/LoadingPage';
-import ItemInputs from '@/components/ItemInputs';
-import ItemBreadcrumb from '@/components/ItemBreadcrumb';
-import ItemHeader from '@/components/ItemHeader';
-import UploadImageFullLength from '@/components/UploadImageFullLength';
+import ItemInputs from '@/components/item/ItemInputs';
+import ItemBreadcrumb from '@/components/item/ItemBreadcrumb';
+import ItemHeader from '@/components/item/ItemHeader';
+import UploadImageFullLength from '@/components/image/UploadImageFullLength';
 import dayjs from 'dayjs';
 
 export default function ItemsPage({ params }) {

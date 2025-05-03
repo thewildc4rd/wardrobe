@@ -1,6 +1,5 @@
 'use client';
 
-import ItemCard from '@/components/ItemCard';
 import React, { useState, useEffect } from 'react';
 import SearchIcon from '@/components/icons/SearchIcon';
 import AddIcon from '@/components/icons/AddIcon';
@@ -10,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
 import { getUserItems } from '@/utils/databaseUtils';
 import { useAuth } from '@/authentication/AuthContext';
 import CrossIcon from '@/components/icons/CrossIcon';
+import ItemCard from '@/components/item/ItemCard';
 
 export default function ItemsPage() {
 	const [records, setRecords] = useState([]);

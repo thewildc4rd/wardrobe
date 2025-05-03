@@ -2,11 +2,11 @@
 
 import { Button } from '@mui/material';
 import React, { useState } from 'react';
-import UploadImage from '@/components/UploadImage';
+import UploadImage from '@/components/image/UploadImage';
 import { useAuth } from '@/authentication/AuthContext';
 import { addItem } from '@/utils/databaseUtils';
 import { useRouter } from 'next/navigation';
-import ItemInputs from '@/components/ItemInputs';
+import ItemInputs from '@/components/item/ItemInputs';
 
 const NewItemPage = (props) => {
 	const [image, setImage] = useState('');

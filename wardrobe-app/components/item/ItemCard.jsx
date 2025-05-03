@@ -1,9 +1,8 @@
 import React from 'react';
-import ImageIcon from '@mui/icons-material/Image';
-import ColourPill from './ColourPill';
-import BrandPill from './BrandPill';
 import TypePill from './TypePill';
-import DefaultImage from './DefaultImage';
+import BrandPill from './BrandPill';
+import ColourPill from './ColourPill';
+import DefaultImage from '../image/DefaultImage';
 
 const ItemCard = ({ item, onClick }) => {
 	return (

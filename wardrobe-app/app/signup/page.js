@@ -1,7 +1,6 @@
 'use client';
 
-import Navbar from '@/components/Navbar';
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { signUp } from '@/authentication/authUtils';
 import { addUser } from '@/utils/databaseUtils';

@@ -4,8 +4,8 @@ import React from 'react';
 import { AuthProvider } from '@/authentication/AuthContext';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '@/config/theme';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '@/components/layout/Navbar';
+import Footer from '@/components/layout/Footer';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 const queryClient = new QueryClient();
