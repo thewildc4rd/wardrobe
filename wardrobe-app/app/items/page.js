@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@/components/icons/SearchIcon';
 import AddIcon from '@/components/icons/AddIcon';
 import { CircularProgress } from '@mui/material';
@@ -12,7 +12,6 @@ import CrossIcon from '@/components/icons/CrossIcon';
 import ItemCard from '@/components/item/ItemCard';
 
 export default function ItemsPage() {
-	const [records, setRecords] = useState([]);
 	const [searchString, setSearchString] = useState('');
 	const [currSearchString, setCurrSearchString] = useState('');
 	const router = useRouter();

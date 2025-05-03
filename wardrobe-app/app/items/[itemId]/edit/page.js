@@ -12,7 +12,7 @@ import ItemHeader from '@/components/item/ItemHeader';
 import UploadImageFullLength from '@/components/image/UploadImageFullLength';
 import dayjs from 'dayjs';
 
-export default function ItemsPage({ params }) {
+export default function EditItemPage({ params }) {
 	const [image, setImage] = useState('');
 	const [itemData, setItemData] = React.useState({});
 	const [errMsg, setErrMsg] = React.useState('');

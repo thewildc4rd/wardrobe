@@ -10,7 +10,7 @@ import ItemBreadcrumb from '@/components/item/ItemBreadcrumb';
 import ItemHeader from '@/components/item/ItemHeader';
 import ItemDisabledInputs from '@/components/item/ItemDisabledInputs';
 
-export default function ItemsPage({ params }) {
+export default function ItemPage({ params }) {
 	const { itemId } = use(params);
 	const router = useRouter();
 

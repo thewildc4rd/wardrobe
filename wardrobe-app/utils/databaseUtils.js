@@ -57,9 +57,9 @@ export const getUserItems = async (userId) => {
 };
 
 export const getUserOutfits = async (userId) => {
-	const users = await getCollection('users');
-	const user = users.filter((user) => user.id == userId)[0];
-	return user.outfits;
+	const outfits = await getCollection('outfits');
+	const userOutfits = outfits.filter((outfit) => outfit.ownerId === userId);
+	return userOutfits;
 };
 
 // export const getItemsInList = async (listId) => {
