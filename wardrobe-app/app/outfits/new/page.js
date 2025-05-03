@@ -33,7 +33,7 @@ const NewOutfitPage = (props) => {
 		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center pt-15'>
 			<h1 className='text-4xl text-black-brown font-bold mb-5'>New Outfit</h1>
 			<div className='flex flex-col gap-4 w-96 mb-10'>
-				<OutfitClothingTypeInput items={items} type={'Top'} />
+				<OutfitClothingTypeInput isLoading={isLoading} items={items} type={'Top'} />
 				<Button variant='contained' onClick={onSubmit}>
 					Create
 				</Button>
