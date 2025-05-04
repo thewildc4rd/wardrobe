@@ -6,7 +6,7 @@ const OutfitItemSearchBar = ({ searchString, setSearchString, expanded, setExpan
 	return (
 		<div className='flex'>
 			<input
-				className='text-base w-full bg-white px-4 py-2 rounded-tl-sm'
+				className='h-[56px] text-base w-full bg-white px-4 py-2 rounded-tl-sm'
 				type='text'
 				placeholder={`Search your wardrobe to add items to your outfit...`}
 				title='Search'
@@ -17,7 +17,7 @@ const OutfitItemSearchBar = ({ searchString, setSearchString, expanded, setExpan
 				}}
 			/>
 			<div
-				className='h-[36px] px-2 flex justify-center items-center bg-zinc-100 rounded-tr-sm hover:bg-zinc-200 transition-all cursor-pointer'
+				className='h-[56px] px-2 flex justify-center items-center bg-zinc-100 rounded-tr-sm hover:bg-zinc-200 transition-all cursor-pointer'
 				onClick={() => {
 					setExpanded(!expanded);
 				}}

@@ -2,6 +2,8 @@ import React from 'react';
 import ColourPill from '../item/ColourPill';
 import TypePill from '../item/TypePill';
 import BrandPill from '../item/BrandPill';
+import ExpandLessIcon from '@mui/icons-material/ExpandLess';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
 const OutfitItemCard = ({ item }) => {
 	return (
@@ -26,6 +28,20 @@ const OutfitItemCard = ({ item }) => {
 					{item?.colours?.map((colour) => (
 						<ColourPill key={colour} colour={colour} />
 					))}
+				</div>
+			</div>
+			<div className='ml-auto h-full flex flex-col justify-center'>
+				<div
+					className='h-8 px-2 flex justify-center items-center bg-zinc-100 rounded-sm hover:bg-zinc-200 transition-all cursor-pointer'
+					onClick={() => {}}
+				>
+					<ExpandLessIcon color='primary' fontSize='medium' />
+				</div>
+				<div
+					className=' h-8 px-2 flex justify-center items-center bg-zinc-100 rounded-sm hover:bg-zinc-200 transition-all cursor-pointer'
+					onClick={() => {}}
+				>
+					<ExpandMoreIcon color='primary' fontSize='medium' />
 				</div>
 			</div>
 		</div>
