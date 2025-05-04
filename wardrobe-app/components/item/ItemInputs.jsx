@@ -57,14 +57,11 @@ const ItemInputs = ({ itemData, setItemData, setErrMsg }) => {
 						setErrMsg('');
 					}}
 				>
-					<MenuItem value={'Top'}>Top</MenuItem>
-					<MenuItem value={'Skirt'}>Skirt</MenuItem>
-					<MenuItem value={'Pants'}>Pants</MenuItem>
-					<MenuItem value={'Jacket'}>Jacket</MenuItem>
-					<MenuItem value={'Dress'}>Dress</MenuItem>
-					<MenuItem value={'Belt'}>Belt</MenuItem>
-					<MenuItem value={'Shirt'}>Shirt</MenuItem>
-					<MenuItem value={'Cardigan'}>Cardigan</MenuItem>
+					{['Top', 'Skirt', 'Pants', 'Jacket', 'Dress', 'Accessory', 'Cardigan', 'Shoes'].map(
+						(type) => (
+							<MenuItem value={type}>{type}</MenuItem>
+						)
+					)}
 				</Select>
 			</FormControl>
 			<TextField

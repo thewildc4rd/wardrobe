@@ -1,15 +1,17 @@
 'use client';
 
-import { Button } from '@mui/material';
-import React, { useState } from 'react';
+import { Button, TextField } from '@mui/material';
+import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/authentication/AuthContext';
 import { addItem, getUserItems } from '@/utils/databaseUtils';
 import { useRouter } from 'next/navigation';
-import OutfitClothingTypeInput from '@/components/outfits/OutfitClothingTypeInput';
+import OutfitClothingInput from '@/components/outfits/OutfitClothingInput';
 import { useQuery } from '@tanstack/react-query';
+import OutfitItemCard from '@/components/outfits/OutfitItemCard';
+import OutfitTagInput from '@/components/outfits/OutfitTagInput';
 
 const NewOutfitPage = (props) => {
-	const [outfitData, setOutfitData] = useState();
+	const [outfitData, setOutfitData] = useState({ name: '', items: [], tags: [] });
 	const [errMsg, setErrMsg] = useState('');
 	const { currentUser } = useAuth();
 	const router = useRouter();
@@ -32,11 +34,37 @@ const NewOutfitPage = (props) => {
 	return (
 		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center pt-15'>
 			<h1 className='text-4xl text-black-brown font-bold mb-5'>New Outfit</h1>
-			<div className='flex flex-col gap-4 w-96 mb-10'>
-				<OutfitClothingTypeInput isLoading={isLoading} items={items} type={'Top'} />
-				<Button variant='contained' onClick={onSubmit}>
-					Create
-				</Button>
+			<div className='flex flex-row gap-20 w-3/4 mb-10 h-full'>
+				<div className='h-full flex-1 flex flex-col gap-4'>
+					<div className='h-full bg-brown-lightest rounded-sm p-8 flex flex-col gap-y-2'>
+						{items
+							?.filter((item) => outfitData.items.includes(item?.id))
+							?.map((item) => (
+								<OutfitItemCard key={item?.id} item={item} />
+							))}
+					</div>
+				</div>
+				<div className='h-full flex-1 flex flex-col gap-4'>
+					<TextField
+						label='Name'
+						id='name'
+						value={outfitData?.name}
+						onChange={(e) => {
+							setOutfitData({ ...outfitData, name: e.target.value });
+							// setErrMsg('');
+						}}
+					/>
+					<OutfitTagInput outfitData={outfitData} setOutfitData={setOutfitData} />
+					<OutfitClothingInput
+						isLoading={isLoading}
+						items={items}
+						outfitData={outfitData}
+						setOutfitData={setOutfitData}
+					/>
+					<Button fullWidth variant='contained' onClick={onSubmit} style={{ marginTop: 'auto' }}>
+						Create
+					</Button>
+				</div>
 			</div>
 		</div>
 	);
