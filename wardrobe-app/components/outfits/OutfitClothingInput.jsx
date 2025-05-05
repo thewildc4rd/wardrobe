@@ -7,10 +7,6 @@ const OutfitClothingInput = ({ isLoading, items, outfitData, setOutfitData }) =>
 	const [searchString, setSearchString] = useState('');
 	const [expanded, setExpanded] = useState(false);
 
-	useEffect(() => {
-		console.log(outfitData);
-	}, [outfitData]);
-
 	const selectItem = (itemId) => {
 		let newOutfitItems = outfitData.items;
 		console.log(newOutfitItems);

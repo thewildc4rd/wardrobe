@@ -31,16 +31,33 @@ const NewOutfitPage = (props) => {
 		// });
 	};
 
+	// direction = -1 for up (earlier in list), direction = 1 for down (later in list)
+	const reorderOutfitItems = (currPos, newPos) => {
+		let newItems = outfitData.items;
+
+		let item = newItems[currPos];
+		newItems[currPos] = newItems[newPos];
+		newItems[newPos] = item;
+
+		setOutfitData({ ...outfitData, items: newItems });
+	};
+
 	return (
 		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4 items-center pt-15'>
 			<h1 className='text-4xl text-black-brown font-bold mb-5'>New Outfit</h1>
 			<div className='flex flex-row gap-20 w-3/4 mb-10 h-full'>
 				<div className='h-full flex-1 flex flex-col gap-4'>
 					<div className='h-full bg-brown-lightest rounded-sm p-8 flex flex-col gap-y-2'>
-						{items
-							?.filter((item) => outfitData.items.includes(item?.id))
-							?.map((item) => (
-								<OutfitItemCard key={item?.id} item={item} />
+						{outfitData?.items
+							?.map((itemId) => items.find((item) => item?.id === itemId))
+							?.map((item, index) => (
+								<OutfitItemCard
+									key={item?.id}
+									item={item}
+									index={index}
+									outfitData={outfitData}
+									reorderOutfitItems={reorderOutfitItems}
+								/>
 							))}
 					</div>
 				</div>

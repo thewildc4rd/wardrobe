@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ColourPill from '../item/ColourPill';
 import TypePill from '../item/TypePill';
 import BrandPill from '../item/BrandPill';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 
-const OutfitItemCard = ({ item }) => {
+const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems }) => {
+	const upDisabled = index === 0;
+	const downDisabled = outfitData?.items?.length - 1 === index;
+
 	return (
 		<div className='w-full h-30 bg-white-pink-light rounded-lg flex flex-row p-3 gap-x-4'>
 			<div
@@ -31,18 +34,28 @@ const OutfitItemCard = ({ item }) => {
 				</div>
 			</div>
 			<div className='ml-auto h-full flex flex-col justify-center'>
-				<div
-					className='h-8 px-2 flex justify-center items-center bg-zinc-100 rounded-sm hover:bg-zinc-200 transition-all cursor-pointer'
-					onClick={() => {}}
+				<button
+					className={`h-8 px-2 flex justify-center items-center rounded-sm transition-all ${
+						upDisabled ? 'opacity-30' : 'hover:bg-zinc-200 cursor-pointer'
+					}`}
+					onClick={() => {
+						reorderOutfitItems(index, index - 1);
+					}}
+					disabled={upDisabled}
 				>
 					<ExpandLessIcon color='primary' fontSize='medium' />
-				</div>
-				<div
-					className=' h-8 px-2 flex justify-center items-center bg-zinc-100 rounded-sm hover:bg-zinc-200 transition-all cursor-pointer'
-					onClick={() => {}}
+				</button>
+				<button
+					className={`h-8 px-2 flex justify-center items-center rounded-sm transition-all ${
+						downDisabled ? 'opacity-30' : 'hover:bg-zinc-200 cursor-pointer'
+					}`}
+					onClick={() => {
+						reorderOutfitItems(index, index + 1);
+					}}
+					disabled={downDisabled}
 				>
 					<ExpandMoreIcon color='primary' fontSize='medium' />
-				</div>
+				</button>
 			</div>
 		</div>
 	);
