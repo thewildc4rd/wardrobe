@@ -57,6 +57,10 @@ const NewOutfitPage = (props) => {
 									index={index}
 									outfitData={outfitData}
 									reorderOutfitItems={reorderOutfitItems}
+									remove={() => {
+										let newItems = outfitData?.items?.filter((x, i) => i !== index);
+										setOutfitData({ ...outfitData, items: newItems });
+									}}
 								/>
 							))}
 					</div>

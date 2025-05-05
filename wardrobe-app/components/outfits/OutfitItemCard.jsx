@@ -4,8 +4,9 @@ import TypePill from '../item/TypePill';
 import BrandPill from '../item/BrandPill';
 import ExpandLessIcon from '@mui/icons-material/ExpandLess';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import CrossIcon from '../icons/CrossIcon';
 
-const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems }) => {
+const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems, remove }) => {
 	const upDisabled = index === 0;
 	const downDisabled = outfitData?.items?.length - 1 === index;
 
@@ -21,7 +22,7 @@ const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems }) => {
 						: "url('/images/defaultImageSquare.png')",
 				}}
 			/>
-			<div className='flex flex-col gap-2'>
+			<div className='flex-1 flex flex-col gap-2'>
 				<div className='font-medium text-lg'>{item?.name}</div>
 				<div className='flex flex-row gap-2 flex-wrap'>
 					{item?.type && <TypePill type={item.type} />}
@@ -33,7 +34,8 @@ const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems }) => {
 					))}
 				</div>
 			</div>
-			<div className='ml-auto h-full flex flex-col justify-center'>
+
+			<div className='mr-10 h-full flex flex-col justify-center'>
 				<button
 					className={`h-8 px-2 flex justify-center items-center rounded-sm transition-all ${
 						upDisabled ? 'opacity-30' : 'hover:bg-zinc-200 cursor-pointer'
@@ -56,6 +58,15 @@ const OutfitItemCard = ({ item, index, outfitData, reorderOutfitItems }) => {
 				>
 					<ExpandMoreIcon color='primary' fontSize='medium' />
 				</button>
+			</div>
+			<div className='h-full flex flex-col'>
+				<CrossIcon
+					className={'cursor-pointer'}
+					colour={'#47392D'}
+					onClick={() => {
+						remove();
+					}}
+				/>
 			</div>
 		</div>
 	);
