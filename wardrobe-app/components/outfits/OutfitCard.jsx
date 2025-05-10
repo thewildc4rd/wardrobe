@@ -9,21 +9,27 @@ const OutfitCard = ({ outfit, onClick }) => {
 			onClick={onClick}
 		>
 			<div className='h-[260px] grid grid-cols-2 grid-rows-2 gap-2'>
-				{outfit?.items?.map((item) => (
-					<div key={item?.id}>
-						{item?.image && (
-							<img src={item?.image} className='h-full w-full bg-contain object-cover rounded-sm' />
-						)}
-						{!item?.image && (
-							<DefaultImage
-								type='image'
-								height='100%'
-								width={'100%'}
-								style={{ borderRadius: '4px' }}
-							/>
-						)}
-					</div>
-				))}
+				{outfit?.items?.map((item, idx) => {
+					if (idx >= 4) return;
+					return (
+						<div key={item?.id}>
+							{item?.image && (
+								<img
+									src={item?.image}
+									className='h-full w-full bg-contain object-cover rounded-sm'
+								/>
+							)}
+							{!item?.image && (
+								<DefaultImage
+									type='image'
+									height='100%'
+									width={'100%'}
+									style={{ borderRadius: '4px' }}
+								/>
+							)}
+						</div>
+					);
+				})}
 			</div>
 			<p className='mt-2 text-base font-medium text-center'>{outfit?.name}</p>
 			<div className='flex flex-row gap-2 flex-wrap justify-center'>
