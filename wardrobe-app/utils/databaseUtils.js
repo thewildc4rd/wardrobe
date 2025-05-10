@@ -1,7 +1,5 @@
 import { addDoc, getDocs, collection, setDoc, doc } from 'firebase/firestore';
 import { db } from '@/config/firebase';
-// const cheerio = require('cheerio');
-// const axios = require('axios');
 
 export const getCollection = async (coll) => {
 	try {
@@ -59,7 +57,20 @@ export const getUserItems = async (userId) => {
 export const getUserOutfits = async (userId) => {
 	const outfits = await getCollection('outfits');
 	const userOutfits = outfits.filter((outfit) => outfit.ownerId === userId);
-	return userOutfits;
+	const userItems = await getUserItems(userId);
+	const userOutfitsWithData = userOutfits.map((outfit) => {
+		const itemsData = outfit.items.map((id) => userItems.find((item) => item.id === id));
+		return { ...outfit, items: itemsData };
+	});
+	return userOutfitsWithData;
+};
+
+export const addOutfit = async (data) => {
+	try {
+		return addDoc(collection(db, 'outfits'), { ...data });
+	} catch (err) {
+		console.error(err);
+	}
 };
 
 // export const getItemsInList = async (listId) => {
@@ -88,17 +99,4 @@ export const getUserOutfits = async (userId) => {
 // 		return { ...list, items };
 // 	});
 // 	return listsWithItems;
-// };
-
-// NEED AXIOS AND CHEERIO
-
-// export const getItemDataFromUrl = async (url) => {
-// 	const { data } = await axios.get(url);
-// 	const $ = cheerio.load(data);
-// 	const image = $('[property="og:image"]').attr('content');
-// 	const price = $('[property="product:price:amount"]').attr('content');
-// 	const title = $('[property="og:title"]').attr('content');
-// 	const availability = $('[property="product:availability"]').attr('content');
-
-// 	return { image, price, title, availability };
 // };

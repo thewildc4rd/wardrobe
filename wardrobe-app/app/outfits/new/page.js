@@ -3,7 +3,7 @@
 import { Button, TextField } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import { useAuth } from '@/authentication/AuthContext';
-import { addItem, getUserItems } from '@/utils/databaseUtils';
+import { addOutfit, getUserItems } from '@/utils/databaseUtils';
 import { useRouter } from 'next/navigation';
 import OutfitClothingInput from '@/components/outfits/OutfitClothingInput';
 import { useQuery } from '@tanstack/react-query';
@@ -23,12 +23,12 @@ const NewOutfitPage = (props) => {
 
 	const onSubmit = () => {
 		let data = {
-			...itemData,
+			...outfitData,
 			ownerId: currentUser.uid,
 		};
-		// addOutfit(data).then(() => {
-		// 	router.push('/outfits');
-		// });
+		addOutfit(data).then(() => {
+			router.push('/outfits');
+		});
 	};
 
 	// direction = -1 for up (earlier in list), direction = 1 for down (later in list)

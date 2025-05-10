@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import { useQuery } from '@tanstack/react-query';
 import { useAuth } from '@/authentication/AuthContext';
 import { getUserOutfits } from '@/utils/databaseUtils';
+import OutfitCard from '@/components/outfits/OutfitCard';
 
 export default function OutfitsPage() {
 	const router = useRouter();

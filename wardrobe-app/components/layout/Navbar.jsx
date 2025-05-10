@@ -14,7 +14,6 @@ const Navbar = ({}) => {
 		{ name: 'Home', url: '/' },
 		{ name: 'Items', url: '/items' },
 		{ name: 'Outfits', url: '/outfits' },
-		{ name: 'Generator', url: '/generator' },
 	];
 
 	return (
