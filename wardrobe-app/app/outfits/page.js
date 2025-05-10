@@ -21,15 +21,23 @@ export default function OutfitsPage() {
 	return (
 		<div className='h-full flex flex-col bg-white-pink px-10 py-6 gap-y-4'>
 			<div className='flex flex-row items-center'>
-				<div className='flex flex-row items-center gap-6'>
+				<div className='flex flex-row items-center gap-3'>
 					<h1 className='text-4xl text-black-brown font-bold'>Outfits</h1>
 					<button
-						className='bg-black-brown text-white-pink font-medium text-base p-[7px] rounded-md hover:opacity-70 transition-all cursor-pointer'
+						className='ml-4 bg-black-brown text-white-pink font-medium text-base h-[34px] w-[34px] rounded-md hover:opacity-70 transition-all cursor-pointer flex justify-center items-center'
 						onClick={() => {
 							router.push('/outfits/new');
 						}}
 					>
 						<AddIcon colour={'#F5F2F2'} />
+					</button>
+					<button
+						className='bg-black-brown text-white-pink font-medium text-base h-[34px] px-4 rounded-md hover:opacity-70 transition-all cursor-pointer'
+						onClick={() => {
+							router.push('/outfits/generator');
+						}}
+					>
+						Generator
 					</button>
 				</div>
 			</div>
